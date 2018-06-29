@@ -23,10 +23,9 @@ class BookShelf extends Component {
                             <h2 className="bookshelf-title">{title}</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
-
                                     {books.map((book) => (
-                                        <li>
-                                            <Book key={book.id} book={book} handleChange={this.props.handleChange}/>
+                                        <li key={book.id}>
+                                            <Book book={book} handleChange={this.props.handleChange}/>
                                         </li> ))}
                                 </ol>
                             </div>

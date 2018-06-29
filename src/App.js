@@ -11,11 +11,9 @@ class App extends Component {
     };
 
     handleChange = (selectedShelf, book) => {
-        console.log('up');
         BookAPI.update(book, selectedShelf);
         this.getAllBooks();
     };
-
 
     getAllBooks() {
         BookAPI.getAll()
