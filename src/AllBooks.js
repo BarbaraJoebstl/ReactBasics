@@ -9,7 +9,7 @@ class AllBooks extends Component {
     static propTypes = {
         books: PropTypes.array.isRequired,
         handleChange: PropTypes.func.isRequired
-    }
+    };
 
     filterByRead(books, title) {
         return books.filter((book) => (book.shelf === title))

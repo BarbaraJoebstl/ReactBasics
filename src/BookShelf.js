@@ -9,7 +9,7 @@ class BookShelf extends Component {
         books: PropTypes.array.isRequired,
         title: PropTypes.string.isRequired,
         handleChange: PropTypes.func.isRequired
-    }
+    };
 
     render() {
         const books = this.props.books;

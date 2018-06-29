@@ -5,11 +5,7 @@ class Book extends Component {
     static propTypes =  {
         book: PropTypes.object.isRequired,
         handleChange: PropTypes.func.isRequired
-    }
-
-    state = {
-        currentShelf: ""
-    }
+    };
 
     render() {
         const book = this.props.book;
