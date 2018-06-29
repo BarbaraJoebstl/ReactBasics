@@ -20,8 +20,8 @@ class AllBooks extends Component {
         const handleChange = this.props.handleChange;
 
         return ( <div>
-                <Link to="/search">
-                    Search Book
+                <Link class="open-search" to="/search">
+                    <a>add new book</a>
                 </Link>
                 <BookShelf
                     key= "currentlyReading"

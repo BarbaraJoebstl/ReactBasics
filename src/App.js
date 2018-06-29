@@ -11,6 +11,7 @@ class App extends Component {
     };
 
     handleChange = (selectedShelf, book) => {
+        console.log('up');
         BookAPI.update(book, selectedShelf);
         this.getAllBooks();
     };
@@ -31,7 +32,6 @@ class App extends Component {
         return (
             <div className="App">
                 <Route path="/search" render={() => (
-                    //TODO
                     <SearchBook books={this.state.books} handleChange={this.handleChange}/>
                 )}/>
                 <Route exact path="/" render={() =>(

@@ -7,7 +7,8 @@ import * as BookAPI from "./BooksAPI";
 class SearchBook extends Component {
     state = {
         query: "",
-        foundBooks: []
+        foundBooks: [],
+        isErrorShown: false
     };
 
     static propTypes = {
@@ -16,9 +17,21 @@ class SearchBook extends Component {
     };
 
     updateQuery = (query) => {
-        this.setState({query: query});
-        this.searchBooks(query);
+        this.setState({isErrorShown: false});
+        if (query.length === 0) {
+            this.setState({query: ""});
+            this.setState({foundBooks: []});
+        } else {
+            this.setState({query: query});
+            this.searchBooks(query);
+        }
     };
+
+    resetSearch() {
+        this.setState(() => ({query: ""}));
+        this.setState(() => ({foundBooks: []}));
+        this.setState(() => ({isErrorShown: false}));
+    }
 
     /**
      * @description
@@ -28,7 +41,8 @@ class SearchBook extends Component {
      * @param {string} value - The search string
      */
     searchBooks = (value)  => {
-        BookAPI.search(value).then(apiFoundBooks => {
+        BookAPI.search(value)
+            .then(apiFoundBooks => {
             if(apiFoundBooks) {
                 apiFoundBooks = apiFoundBooks.map(apiFoundBook => {
                     apiFoundBook.shelf = 'none';
@@ -40,26 +54,32 @@ class SearchBook extends Component {
                     this.setState(() => ({foundBooks: apiFoundBooks}));
                 });
             }
-        });
+        })
+            .catch(e => {
+                this.setState(() => ({foundBooks: []}));
+                this.setState(() => ({isErrorShown: true}));
+            });
     };
 
     render() {
-        const { query, foundBooks } = this.state;
+        const { query, foundBooks, isErrorShown } = this.state;
         const { handleChange } = this.props.handleChange;
 
         return (
             <div>
-                <Link to="/">
-                    Back to my bookshelves
-                </Link>
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Search books"
-                        value={query}
-                        onChange={(e) => this.updateQuery(e.target.value)}/>
+                <div class="search-books-bar">
+                    <Link class="close-search" to="/">
+                        Back to my bookshelves
+                    </Link>
+                    <div class="search-books-input-wrapper">
+                        <input
+                            type="text"
+                            placeholder="Search books"
+                            value={query}
+                            onChange={(e) => this.updateQuery(e.target.value)}/>
+                    </div>
                 </div>
-
+                <div class="search-books-results">
                 {foundBooks && (
                     <BookShelf
                         key= "searchShelf"
@@ -69,6 +89,18 @@ class SearchBook extends Component {
                         handleChange={handleChange}
                     />
                 )}
+
+
+                {!foundBooks && (
+                    <div>nothing found</div>
+                )}
+                {isErrorShown&& (
+                    <div>...something went wrong :/
+
+                <button onClick={this.resetSearch}>reset this search</button>
+                    </div>
+                    )}
+</div>
             </div>
         )
     }
