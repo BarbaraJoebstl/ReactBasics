@@ -1,9 +1,9 @@
 import React, {
     Component
-} from 'react'
-import PropTypes from 'prop-types'
-import BookShelf from './BookShelf'
-import {Link} from 'react-router-dom'
+} from "react";
+import PropTypes from "prop-types";
+import BookShelf from "./BookShelf";
+import {Link} from "react-router-dom";
 
 class AllBooks extends Component {
     static propTypes = {
@@ -20,11 +20,11 @@ class AllBooks extends Component {
         const handleChange = this.props.handleChange;
 
         return ( <div>
-                <Link to='/search'>
+                <Link to="/search">
                     Search Book
                 </Link>
                 <BookShelf
-                    key= "currentlyReadingShelf"
+                    key= "currentlyReading"
                     className="list-books"
                     books = {this.filterByRead(books, 'currentlyReading')}
                     title = "Currently Reading"

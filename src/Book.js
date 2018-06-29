@@ -1,6 +1,5 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom'
+import React, {Component} from "react"
+import PropTypes from "prop-types"
 
 class Book extends Component {
     static propTypes =  {
@@ -9,7 +8,7 @@ class Book extends Component {
     }
 
     state = {
-        currentShelf: ''
+        currentShelf: ""
     }
 
     render() {

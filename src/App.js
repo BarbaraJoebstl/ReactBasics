@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import './App.css';
-import * as BookAPI from './BooksAPI';
+import React, { Component } from "react";
+import "./App.css";
+import * as BookAPI from "./BooksAPI";
 import AllBooks from "./AllBooks";
-import {Route} from 'react-router-dom';
+import {Route} from "react-router-dom";
 import SearchBook from "./SearchBook";
 
 class App extends Component {
     state = {
         books: []
-    }
+    };
 
     handleChange = (selectedShelf, book) => {
         BookAPI.update(book, selectedShelf);
         this.getAllBooks();
-    }
+    };
 
 
     getAllBooks() {
@@ -31,7 +31,8 @@ class App extends Component {
         return (
             <div className="App">
                 <Route path="/search" render={() => (
-                    <SearchBook/>
+                    //TODO
+                    <SearchBook books={this.state.books} handleChange={this.handleChange}/>
                 )}/>
                 <Route exact path="/" render={() =>(
                     <AllBooks books={this.state.books} handleChange={this.handleChange}/>
