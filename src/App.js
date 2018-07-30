@@ -1,8 +1,12 @@
-import React, { Component } from "react";
+import React, {
+    Component
+} from "react";
 import "./App.css";
 import * as BookAPI from "./BooksAPI";
 import AllBooks from "./AllBooks";
-import {Route} from "react-router-dom";
+import {
+    Route
+} from "react-router-dom";
 import SearchBook from "./SearchBook";
 
 class App extends Component {
@@ -11,14 +15,17 @@ class App extends Component {
     };
 
     handleChange = (selectedShelf, book) => {
-        BookAPI.update(book, selectedShelf);
-        this.getAllBooks();
+        BookAPI.update(book, selectedShelf).then(() => {
+            this.getAllBooks();
+        });
     };
 
     getAllBooks() {
         BookAPI.getAll()
             .then((books) => {
-                this.setState(() => ({books}));
+                this.setState(() => ({
+                    books
+                }));
             })
     }
 
@@ -27,15 +34,36 @@ class App extends Component {
     }
 
     render() {
-        return (
-            <div className="App">
-                <Route path="/search" render={() => (
-                    <SearchBook books={this.state.books} handleChange={this.handleChange}/>
-                )}/>
-                <Route exact path="/" render={() =>(
-                    <AllBooks books={this.state.books} handleChange={this.handleChange}/>
-                )} />
-            </div>
+        return ( <
+            div className = "App" >
+            <
+            Route path = "/search"
+            render = {
+                () => ( <
+                    SearchBook books = {
+                        this.state.books
+                    }
+                    handleChange = {
+                        this.handleChange
+                    }
+                    />
+                )
+            }
+            /> <
+            Route exact path = "/"
+            render = {
+                () => ( <
+                    AllBooks books = {
+                        this.state.books
+                    }
+                    handleChange = {
+                        this.handleChange
+                    }
+                    />
+                )
+            }
+            /> <
+            /div>
         );
     }
 }

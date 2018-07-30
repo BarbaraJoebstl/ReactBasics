@@ -16,8 +16,7 @@ class AllBooks extends Component {
     };
 
     render() {
-        const books = this.props.books;
-        const handleChange = this.props.handleChange;
+        const { books, handleChange } = this.props;
 
         return ( <div>
                 <Link className="open-search" to="/search">
